@@ -13,22 +13,48 @@ export interface Stage {
   ordering: number;
 }
 
-export interface SportEvent {
+export interface Goal {
   id: string;
+  type: string;
+  time: string;
+  player: string;
+  team: string;
+}
+
+export interface Card {
+  id: string;
+  type: string;
+  time: string;
+  player: string;
+  team: string;
+}
+
+export interface Result {
+  homeGoals: number;
+  awayGoals: number;
+  winner: string | null;
+  message: string | null;
+  goals: Goal[];
+  yellowCards: Card[];
+  secondYellowCards: Card[];
+  directRedCards: Card[];
+}
+
+export interface SportEvent {
+  season: number;
   status: string;
   timeVenueUTC: string;
   dateVenue: string;
   stadium: string | null;
   homeTeam: Team | null;
   awayTeam: Team;
-  result: string | null;
+  result: Result | null;
   stage: Stage;
   group: string | null;
   originCompetitionId: string;
   originCompetitionName: string;
-  sport: string;
 }
 
 export interface EventsResponse {
-  events: SportEvent[];
+  data: SportEvent[];
 }
