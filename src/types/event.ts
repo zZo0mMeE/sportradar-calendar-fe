@@ -41,6 +41,7 @@ export interface Result {
 }
 
 export interface SportEvent {
+  id?: string;
   season: number;
   status: string;
   timeVenueUTC: string;
@@ -53,6 +54,7 @@ export interface SportEvent {
   group: string | null;
   originCompetitionId: string;
   originCompetitionName: string;
+  sport: string;
 }
 
 export interface EventsResponse {

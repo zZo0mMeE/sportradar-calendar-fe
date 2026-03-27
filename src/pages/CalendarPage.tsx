@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
-import type { SportEvent, EventsResponse } from '../types/event';
+import { useState } from 'react';
+import { useEvents } from '../hooks/useEvents';
 import { getDaysInMonth, getFirstDayOfMonth } from '../utils/dateUtils';
 import CalendarHeader from '../components/CalendarHeader';
 import CalendarGrid from '../components/CalendarGrid';
+import { useNavigate } from 'react-router-dom';
+import type { SportEvent } from '../types/event';
 
 interface CalendarDay {
     date: Date;
@@ -11,20 +13,13 @@ interface CalendarDay {
 }
 
 const CalendarPage = () => {
-    const [events, setEvents] = useState<SportEvent[]>([]);
+    const { events, loading } = useEvents();
     const [currentDate, setCurrentDate] = useState(new Date(2024, 0, 1));
-
-    useEffect(() => {
-        fetch('/events.json')
-            .then(response => response.json())
-            .then((data: EventsResponse) => {
-                setEvents(data.data);
-            })
-            .catch(error => console.error('Error loading events:', error));
-    }, []);
+    const navigate = useNavigate();
 
     const getEventsForDate = (date: Date): SportEvent[] => {
-        return events.filter(event => event.dateVenue === date.toISOString().split('T')[0]);
+        const dateStr = date.toISOString().split('T')[0];
+        return events.filter(event => event.dateVenue === dateStr);
     };
 
     const goToPreviousMonth = () => {
@@ -77,8 +72,10 @@ const CalendarPage = () => {
     }
 
     const handleEventClick = (event: SportEvent) => {
-        alert(`Event: ${event.originCompetitionName}\n${event.homeTeam?.name || 'TBD'} vs ${event.awayTeam.name}`);
+        navigate(`/event/${(event as any).id}`);
     };
+
+    if (loading) return <div>Loading...</div>;
 
     return (
         <div className="min-h-screen bg-gray-50 p-4">
