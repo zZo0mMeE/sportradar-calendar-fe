@@ -1,0 +1,47 @@
+.add-event-page {
+  @apply max-w-3xl mx-auto rounded-3xl bg-white p-6 shadow-sm;
+}
+
+.page-heading {
+  @apply mb-6 text-2xl font-semibold text-slate-900;
+}
+
+.form-section {
+  @apply mb-6 border-b border-slate-200 pb-6;
+}
+
+.section-title {
+  @apply mb-4 text-lg font-semibold text-slate-900;
+}
+
+.field-grid {
+  @apply grid gap-4 md:grid-cols-2;
+}
+
+.field-group {
+  @apply flex flex-col gap-2;
+}
+
+.field-label {
+  @apply text-sm font-medium text-slate-700;
+}
+
+.field-input {
+  @apply w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100;
+}
+
+.error-text {
+  @apply text-sm text-red-600;
+}
+
+.submit-button {
+  @apply w-full rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700;
+}
+
+.form-toolbar {
+  @apply mb-4;
+}
+
+.back-link {
+  @apply inline-flex items-center text-sm text-slate-600 hover:text-slate-900 transition-colors;
+}

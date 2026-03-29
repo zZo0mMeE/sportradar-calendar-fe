@@ -4,8 +4,12 @@ import './EventDetails.css';
 
 export const EventDetails = () => {
   const { id } = useParams();
-  const { getEventById } = useEvents();
+  const { getEventById, loading } = useEvents();
   const event = getEventById(id || '');
+
+  if (loading) {
+    return <div className="event-detail-page">Loading event details...</div>;
+  }
 
   if (!event) {
     return (

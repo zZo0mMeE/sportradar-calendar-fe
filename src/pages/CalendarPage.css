@@ -1,0 +1,3 @@
+.loading-message {
+  @apply text-center p-8 text-slate-600;
+}

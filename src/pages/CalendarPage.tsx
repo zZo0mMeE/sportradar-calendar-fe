@@ -5,6 +5,7 @@ import CalendarHeader from '../components/CalendarHeader';
 import CalendarGrid from '../components/CalendarGrid';
 import { useNavigate } from 'react-router-dom';
 import type { SportEvent } from '../types/event';
+import './CalendarPage.css';
 
 interface CalendarDay {
     date: Date;
@@ -18,7 +19,10 @@ const CalendarPage = () => {
     const navigate = useNavigate();
 
     const getEventsForDate = (date: Date): SportEvent[] => {
-        const dateStr = date.toISOString().split('T')[0];
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const dateStr = `${year}-${month}-${day}`;
         return events.filter(event => event.dateVenue === dateStr);
     };
 
@@ -75,7 +79,9 @@ const CalendarPage = () => {
         navigate(`/event/${(event as any).id}`);
     };
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) {
+        return <div className="loading-message">Loading events...</div>;
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 p-4">
