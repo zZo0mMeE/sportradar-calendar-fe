@@ -1,3 +1,179 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.app-header {
+  @apply flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6 px-2 py-3 bg-white rounded-xl shadow-sm;
+}
+
+.app-header__brand {
+  @apply text-xl font-semibold text-slate-900;
+}
+
+.app-header__nav {
+  @apply flex flex-wrap gap-3;
+}
+
+.app-link {
+  @apply px-4 py-2 rounded-2xl bg-slate-100 text-slate-700 transition hover:bg-slate-200;
+}
+
+.app-link--active {
+  @apply bg-slate-900 text-white;
+}
+
+.add-event-page {
+  @apply max-w-3xl mx-auto rounded-3xl bg-white p-6 shadow-sm;
+}
+
+.page-heading {
+  @apply mb-6 text-2xl font-semibold text-slate-900;
+}
+
+.form-section {
+  @apply mb-6 border-b border-slate-200 pb-6;
+}
+
+.section-title {
+  @apply mb-4 text-lg font-semibold text-slate-900;
+}
+
+.field-grid {
+  @apply grid gap-4 md:grid-cols-2;
+}
+
+.field-group {
+  @apply flex flex-col gap-2;
+}
+
+.field-label {
+  @apply text-sm font-medium text-slate-700;
+}
+
+.field-input {
+  @apply w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100;
+}
+
+.error-text {
+  @apply text-sm text-red-600;
+}
+
+.submit-button {
+  @apply w-full rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700;
+}
+
+.form-toolbar {
+  @apply mb-4;
+}
+
+.back-link {
+  @apply inline-flex items-center text-sm text-slate-600 hover:text-slate-900 transition-colors;
+}
+
+.loading-message {
+  @apply text-center p-8 text-slate-600;
+}
+
+.event-detail-page {
+  @apply max-w-3xl mx-auto px-4 py-8;
+}
+
+.event-card {
+  @apply bg-white rounded-lg shadow-lg overflow-hidden;
+}
+
+.event-header {
+  @apply bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4;
+}
+
+.event-sport {
+  @apply text-white text-sm font-semibold uppercase tracking-wide;
+}
+
+.event-status {
+  @apply bg-white/20 text-white px-3 py-1 rounded-full text-sm;
+}
+
+.event-title {
+  @apply text-2xl md:text-3xl font-bold text-white mt-2;
+}
+
+.event-details-body {
+  @apply p-6 space-y-6;
+}
+
+.info-section {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 pb-4 border-b;
+}
+
+.info-label {
+  @apply text-sm font-semibold text-gray-500 uppercase mb-1;
+}
+
+.info-value {
+  @apply text-lg font-medium text-gray-900;
+}
+
+.teams-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6 pb-4 border-b;
+}
+
+.team-card {
+  @apply bg-gray-50 rounded-lg p-3;
+}
+
+.team-name {
+  @apply font-semibold text-gray-900;
+}
+
+.team-official {
+  @apply text-sm text-gray-600;
+}
+
+.team-country {
+  @apply text-xs text-gray-500 mt-1;
+}
+
+.competition-stage {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 pb-4 border-b;
+}
+
+.stadium-section {
+  @apply pb-4 border-b;
+}
+
+.result-section {
+  @apply pb-4 border-b;
+}
+
+.result-value {
+  @apply text-xl font-bold text-gray-900;
+}
+
+.event-metadata {
+  @apply pt-2;
+}
+
+.event-id {
+  @apply text-xs text-gray-400;
+}
+
+.event-not-found {
+  @apply text-center py-12;
+}
+
+.event-not-found h2 {
+  @apply text-2xl font-bold text-gray-700 mb-4;
+}
+
+.month-jump-bar {
+  @apply mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between;
+}
+
+.month-jump-label {
+  @apply text-sm text-slate-700 font-medium;
+}
+
+.month-jump-select {
+  @apply rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100;
+}

@@ -3,6 +3,7 @@ import CalendarPage from './pages/CalendarPage';
 import { EventDetails } from './components/EventDetails';
 import { AddEvent } from './pages/AddEvent';
 import { EventsProvider } from './context/EventsContext';
+import { Navigation } from './components/Navigation';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <EventsProvider>
         <div className="min-h-screen bg-gray-100">
           <main className="container mx-auto px-4 py-8">
+            <Navigation />
             <Routes>
               <Route path="/" element={<CalendarPage />} />
               <Route path="/event/:id" element={<EventDetails />} />

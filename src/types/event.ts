@@ -29,15 +29,30 @@ export interface Card {
   team: string;
 }
 
+export interface ScorePeriod {
+  homeGoals: number;
+  awayGoals: number;
+}
+
+export interface ScoreByPeriods {
+  firstHalf: ScorePeriod;
+  secondHalf: ScorePeriod;
+}
+
 export interface Result {
   homeGoals: number;
   awayGoals: number;
   winner: string | null;
+  winnerId?: string | null;
   message: string | null;
   goals: Goal[];
   yellowCards: Card[];
   secondYellowCards: Card[];
   directRedCards: Card[];
+  scoreByPeriods?: ScoreByPeriods | null;
+  yellowCardsCount?: number;
+  secondYellowCardsCount?: number;
+  directRedCardsCount?: number;
 }
 
 export interface SportEvent {

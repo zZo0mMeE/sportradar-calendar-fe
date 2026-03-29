@@ -8,6 +8,7 @@ interface EventsContextValue {
   error: string | null;
   getEventById: (id: string) => SportEvent | undefined;
   addEvent: (newEvent: Omit<SportEvent, 'id'>) => void;
+  updateEvent: (event: SportEvent) => void;
 }
 
 const EventsContext = createContext<EventsContextValue | null>(null);
@@ -47,13 +48,17 @@ export const EventsProvider = ({ children }: { children: ReactNode }) => {
     setEvents(prev => [...prev, eventWithId]);
   };
 
+  const updateEvent = (updatedEvent: SportEvent) => {
+    setEvents(prev => prev.map(event => (event.id === updatedEvent.id ? updatedEvent : event)));
+  };
+
   const getEventById = useCallback(
     (id: string) => events.find(event => event.id === id),
     [events],
   );
 
   return (
-    <EventsContext.Provider value={{ events, loading, error, getEventById, addEvent }}>
+    <EventsContext.Provider value={{ events, loading, error, getEventById, addEvent, updateEvent }}>
       {children}
     </EventsContext.Provider>
   );

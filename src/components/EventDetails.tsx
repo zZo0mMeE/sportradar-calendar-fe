@@ -1,10 +1,13 @@
-import { useParams, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEvents } from '../hooks/useEvents';
-import './EventDetails.css';
+import type { Card } from '../types/event';
 
 export const EventDetails = () => {
+  const [showMore, setShowMore] = useState(false);
   const { id } = useParams();
   const { getEventById, loading } = useEvents();
+  const navigate = useNavigate();
   const event = getEventById(id || '');
 
   if (loading) {
@@ -34,6 +37,33 @@ export const EventDetails = () => {
     return event.awayTeam.name;
   };
 
+  const renderCards = (cards: Card[], title: string) => {
+    if (!cards.length) return null;
+    return (
+      <div className="info-section">
+        <p className="info-label">{title}</p>
+        <div className="space-y-2">
+          {cards.map(card => (
+            <div key={card.id} className="team-card">
+              <p className="team-name">{card.player} ({card.team})</p>
+              <p className="team-official">{card.type} at {card.time}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const renderCountSummary = (label: string, count?: number | null) => {
+    if (!count) return null;
+    return (
+      <div>
+        <p className="info-label">{label}</p>
+        <p className="info-value">{count}</p>
+      </div>
+    );
+  };
+
   return (
     <div className="event-detail-page">
       <Link to="/" className="back-link">← Back to Calendar</Link>
@@ -45,6 +75,22 @@ export const EventDetails = () => {
             <span className="event-status">{event.status}</span>
           </div>
           <h1 className="event-title">{getTeamsDisplay()}</h1>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <button
+              type="button"
+              className="app-link"
+              onClick={() => navigate('/add-event', { state: { event } })}
+            >
+              Edit match
+            </button>
+            <button
+              type="button"
+              className="app-link"
+              onClick={() => setShowMore(prev => !prev)}
+            >
+              {showMore ? 'Hide more event details' : 'Show more event details'}
+            </button>
+          </div>
         </div>
 
         <div className="event-details-body">
@@ -102,6 +148,68 @@ export const EventDetails = () => {
             <div className="result-section">
               <p className="info-label">Result</p>
               <p className="result-value">{`${event.result.homeGoals} : ${event.result.awayGoals}`}</p>
+            </div>
+          )}
+
+          {showMore && (
+            <div className="space-y-4">
+              <div className="competition-stage">
+                <div>
+                  <p className="info-label">Competition ID</p>
+                  <p className="info-value">{event.originCompetitionId}</p>
+                </div>
+                <div>
+                  <p className="info-label">Stage Order</p>
+                  <p className="info-value">{event.stage.ordering}</p>
+                </div>
+              </div>
+
+              {event.group && (
+                <div className="stadium-section">
+                  <p className="info-label">Group</p>
+                  <p className="info-value">{event.group}</p>
+                </div>
+              )}
+
+              {event.homeTeam && (
+                <div className="competition-stage">
+                  <div>
+                    <p className="info-label">Home Team Slug</p>
+                    <p className="info-value">{event.homeTeam.slug}</p>
+                  </div>
+                  <div>
+                    <p className="info-label">Away Team Slug</p>
+                    <p className="info-value">{event.awayTeam.slug}</p>
+                  </div>
+                </div>
+              )}
+
+              {event.result?.scoreByPeriods && (
+                <div className="stadium-section">
+                  <p className="info-label">Half time scores</p>
+                  <div className="competition-stage">
+                    <div>
+                      <p className="info-value">1st half: {event.result.scoreByPeriods.firstHalf.homeGoals} - {event.result.scoreByPeriods.firstHalf.awayGoals}</p>
+                    </div>
+                    <div>
+                      <p className="info-value">2nd half: {event.result.scoreByPeriods.secondHalf.homeGoals} - {event.result.scoreByPeriods.secondHalf.awayGoals}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {(event.result?.yellowCardsCount || event.result?.secondYellowCardsCount || event.result?.directRedCardsCount) && (
+                <div className="competition-stage">
+                  {renderCountSummary('Yellow cards', event.result?.yellowCardsCount)}
+                  {renderCountSummary('Second yellow cards', event.result?.secondYellowCardsCount)}
+                  {renderCountSummary('Direct red cards', event.result?.directRedCardsCount)}
+                </div>
+              )}
+
+              {renderCards(event.result?.goals || [], 'Goals')}
+              {renderCards(event.result?.yellowCards || [], 'Yellow Cards')}
+              {renderCards(event.result?.secondYellowCards || [], 'Second Yellow Cards')}
+              {renderCards(event.result?.directRedCards || [], 'Direct Red Cards')}
             </div>
           )}
 
