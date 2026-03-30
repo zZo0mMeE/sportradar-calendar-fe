@@ -1,0 +1,27 @@
+AI Usage in Development
+
+I used AI assistance throughout development to improve efficiency and speed up implementation.
+
+Used for:
+- Initial project scaffolding and component structure
+- TypeScript type definitions and boilerplate
+- React patterns and best practices suggestions
+- Bug fixing and debugging assistance
+- Code organization and refactoring ideas
+
+My independent work:
+- Full routing and navigation logic
+- Responsive design decisions and implementation
+- Complex form validation rules and error handling
+- Event editing functionality
+- Calendar month calculations and filtering
+- Performance optimizations
+- All final code review and validation
+- Testing across browsers and devices
+
+All AI-assisted code was reviewed by me, tested with real data, and validated for security and functionality. I maintained full control over architectural decisions and feature implementation.
+
+Additional resources used: MDN Web Docs for React/TypeScript documentation, StackOverflow for specific problem-solving and edge case handling.
+
+Note: I used various tools and resources besides AI for development, learning, and problem-solving throughout the project.
+
